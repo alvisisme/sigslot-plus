@@ -1,15 +1,17 @@
-all: out examples
+all: build examples
 
-examples: out/example_simple out/example
+examples: build/example_simple build/example
 
-out/example_simple: examples/example_simple.cpp
+build/example_simple: examples/example_simple.cpp
 	g++ examples/example_simple.cpp -I. -o $@
 
-out/example: examples/example.cpp
+build/example: examples/example.cpp
 	g++ examples/example.cpp -I. -o $@
 
-out:
-	mkdir -p out
+build:
+	mkdir -p build
 
 clean:
-	rm -rf out
+	rm -rf build
+
+.PHONY: build clean
