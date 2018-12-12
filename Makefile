@@ -1,17 +1,21 @@
-all: build examples
+all: examples
 
-examples: build/example_simple build/example
+examples: build/simple build/chain
 
-build/example_simple: examples/example_simple.cpp
-	g++ examples/example_simple.cpp -I. -o $@
+build/simple: build examples/simple.cpp
+	g++ examples/simple.cpp -I. -o $@
 
-build/example: examples/example.cpp
-	g++ examples/example.cpp -I. -o $@
+build/chain: build examples/chain.cpp
+	g++ examples/chain.cpp -I. -o $@
 
 build:
-	mkdir -p build
+	@mkdir -p build
+
+test:
+	@./build/simple
+	@./build/chain
 
 clean:
 	rm -rf build
 
-.PHONY: build clean
+.PHONY: build test clean 
